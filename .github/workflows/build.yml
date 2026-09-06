@@ -1,0 +1,22 @@
+name: Build Genesis Plus GX
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+
+      - name: Compile
+        run: |
+          make -f Makefile.libretro
+
+      - name: Store core
+        uses: actions/upload-artifact@v4
+        with:
+          name: genesis-plus-gx-linux
+          path: genesis_plus_gx_libretro.so
